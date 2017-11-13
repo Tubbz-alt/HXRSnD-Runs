@@ -22,4 +22,4 @@ FILE=`readlink -f $0`
 SCRIPTPATH=`dirname $FILE`
 
 # Start the ipython shell using the snd environment
-jupyter notebook run_hxrsnd_template.ipynb
+jupyter notebook $SCRIPTPATH/run_hxrsnd_template.ipynb
