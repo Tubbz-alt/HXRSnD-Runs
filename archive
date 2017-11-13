@@ -21,4 +21,4 @@ source activate snd_opr
 FILE=`readlink -f $0`
 SCRIPTPATH=`dirname $FILE`
 
-python _archive.py $@
+python $SCRIPTPATH/_archive.py $@
