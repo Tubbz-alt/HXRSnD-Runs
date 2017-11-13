@@ -18,9 +18,10 @@ import argparse
 from pathlib import Path
 from logging.handlers import RotatingFileHandler
 
+DIR_CUR = Path(os.path.dirname(__file__))
+
 def get_logger(name, stream_level=logging.WARNING, log_file=True, 
-               log_dir=Path(Path(os.path.dirname(__file__)) / 'logs'), 
-               max_bytes=1024*1024):
+               log_dir=DIR_CUR / 'logs', max_bytes=1024*1024):
     """
     Returns a properly configured logger that has a stream handler and a file
     handler.
@@ -103,10 +104,10 @@ def setup_parser_and_logging(description=""):
     parser.add_argument("-d", "--debug", action="store_true",
                         help="Run in debug mode.",)        
     parser.add_argument("--log_dir", metavar="P", type=str,  
-                        default=str(Path.cwd() / "logs"), action="store",
+                        default=str(DIR_CUR / "logs"), action="store",
                         help="Path to save the logs in.")
     parser.add_argument("-t", "--template", metavar="P", type=str,
-                        default=str(Path.cwd() / "run_hxrsnd_template.ipynb"),
+                        default=str(DIR_CUR / "run_hxrsnd_template.ipynb"),
                         action="store", help="Template file path to be copied.")
     parser.add_argument("-s", "--save_path", metavar="P", type=str,
                         default="", action="store",
@@ -158,7 +159,7 @@ def archive(template, save_path):
         time_current = time.strftime("%H_%M_%S")
 
         # Directory path
-        save_dir = Path("runs_{0}".format(date_current))
+        save_dir = DIR_CUR / "runs_{0}".format(date_current)
         # Create it if it doesnt exist
         if not save_dir.exists():
             save_dir.mkdir(parents=True)
